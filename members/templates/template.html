@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="{% static 'myglobal.css' %}">
+
+<body>
+
+{% include "mymenu.html" with me='TOBIAS' sponsor='W3SCHOOLS' %}
+
+
+<!--     Cycle     -->
+<ul>
+{% for x in fruits %}
+  <li style='color:{% cycle "red" "green" "blue" %}'>
+    <h1>{{ x }}</h1>
+  </li>
+{% endfor %}
+</ul>
+
+
+<!--     now     -->
+<h1>{% now "Y-m-d" %}</h1>
+<h1>{% now "d-m-Y" %}</h1>
+
+<!--     firstof     -->
+<h1>{% firstof fruits firstname mymembers  %}</h1>
+
+
+<!--     Value Print     -->
+<h1>Hello {{firstname}}, how are you?</h1><br>
+
+<!--     for     -->
+{% for x,y in mycar.items %}
+  <p>The {{x}} is {{y}} . </p>
+{% endfor %}
+
+<!--     forloop.counter     -->
+{% for x in fruits %}
+  <li>{{forloop.counter0}}</li>
+{% endfor %}
+
+<!--     forloop.revcounter     -->
+{% for x in fruits %}
+  <li>{{forloop.revcounter}}</li>
+{% endfor %}
+
+<!--     forloop.first     -->
+{% for x in fruits %}
+  <li>{{forloop.first}}</li>
+{% endfor %}
+
+<!--     for- member value print     -->
+<br>
+<ul>
+  {% for x in mymembers reversed %}
+    <h1>{{ x.id }}</h1>
+    <li> {{x.firstname}}  {{ x.lastname }}</li>
+  {% endfor %}
+</ul>
+
+<br>
+<!--     if else     -->
+{% if greeting == 1 %}
+  <h1>Hello</h1>
+{% else %}
+  <h1>Bye</h1>
+{% endif %}
+
+
+<!--     with     -->
+{% with myvar=fruits|length %}
+  {% for x in fruits %}
+    <p> {{ x }} is one of {{ myvar }} fruits.</p>
+  {% endfor %}
+{% endwith %}
+
+<!--     lorem     -->
+{% lorem 150 w %}
+
+
+<br>
+<h2>'mymembers = Member.objects.all().values()' == {{mymembers}}</h2>
+
+<h2>'mydata = Member.objects.all()' == {{mydata}}</h2>
+
+
+
+
+
+<p>In views.py you can see what the fruits variable looks like.</p>
+<p>In template.html you can see how to use the variable.</p>
+
+</body>
+</html>
